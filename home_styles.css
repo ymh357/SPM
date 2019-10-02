@@ -1,0 +1,178 @@
+html,body{
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+    position: relative;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 999;
+    opacity: 0.6;
+}
+
+nav>span{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: darkgray;
+}
+
+nav>span>a{
+    color: white;
+}
+
+nav a{
+    color:darkgray;
+}
+nav a:hover{
+    color: antiquewhite;
+}
+
+nav ul{
+    display: block;
+    background-color: black;
+    height: 100px;
+}
+nav li{
+    margin-top: 20px;
+    line-height: 60px;
+    margin-right: 50px;
+    display: inline-block;
+    float : left;
+    height:60px;
+
+    color:darkgray;
+}
+
+#logo{
+    width:60px;
+    border-radius:50%;
+    background-image: url("logo.png");
+    background-size:     contain;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+#login_register{
+    float: right;
+}
+
+#login_register>div>a{
+    display: inline-block;
+    float: right;
+}
+
+#introduction{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    background-image: url("bg.jpg");
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+h1{
+    letter-spacing: 6px;
+    margin: 20px 0 20px 0;
+}
+
+#introduction>.words{
+    padding: 10%;
+    width: 40%;
+    word-spacing: 2px;
+}
+
+.downArrow{
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    background-color: transparent;
+    width: 100px;
+    height: 100px;
+    border-bottom: 0 transparent;
+    border-right: 0 transparent;
+    border-top: 10px solid green;
+    border-left: 10px solid green;
+    transform: rotate(225deg);
+    transition: top 1s;
+}
+
+.downArrow:hover {
+    top: 60%;
+}
+.upArrow{
+    position: absolute;
+    left: 15%;
+    top: 70%;
+    background-color: transparent;
+    width: 100px;
+    height: 100px;
+    border-bottom: 0 transparent;
+    border-right: 0 transparent;
+    border-top: 10px solid green;
+    border-left: 10px solid green;
+    transform: rotate(45deg);
+    transition: top 1s;
+}
+
+.upArrow:hover {
+    top: 60%;
+}
+
+#plans{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+#plan_profile{
+    float: left;
+    width: 33.3%;
+    height: 100%;
+    background-color: purple;
+    text-align: center;
+}
+
+#plan_profile h1{
+    margin-top: 40%;
+}
+#plan_profile h2 a{
+    color: darkgray;
+    text-decoration: none;
+}
+#plan_profile h2 a:hover{
+    color: white;
+}
+
+#plan_display{
+    float: left;
+    width: 66.6%;
+    height: 100%;
+}
+
+#silver,#gold,#diamond{
+    width: 33.3%;
+    float: left;
+    height: 100%;
+    text-align: center;
+}
+
+#silver{
+    background-color: silver;
+}
+#gold{
+    background-color: gold;
+}
+#diamond{
+    background-color: floralwhite;
+}

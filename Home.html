@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gabriel and David Professional Carwash</title>
+
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" href="home_styles.css">
+</head>
+<body>
+<nav>
+    <ul>
+        <li id="logo"></li>
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="About.html">About us</a></li>
+        <li><a href="Plans.html">Plans</a></li>
+        <li id="login_register"><a href="Login.html">Login</a></li>
+    </ul>
+    <span>Not a user yet? Click <a href="Register.html">here</a> to register</span>
+</nav>
+
+<div id="introduction">
+    <div class="words">
+        <h1>Business Case Background:</h1>
+
+        Gabriel and David are 16-year-old boys who go to school together and on the weekends wash
+        cars for extra money. They are both hardworking and ambitious young men. While their friends
+        spend their weekends playing football or computer games, Gabriel and David are very focussed
+        on their goal, to buy a car when they get their driver’s license - when they turn 18. Their small
+        business began when their parents paid them to wash their cars. They studied car washing
+        techniques and watched lots of YouTube videos to figure out the best way to clean the cars inside
+        and outside. They decided to ask family if they would also like their cars washed, for a price of
+        course! Friends of their family and their friend’s parents also started asking the boys to wash
+        cars. They visit their customers houses to wash the cars, which the customers find suitable. Their
+        business continued to grow due to word of mouth. They are reliable, thorough and meticulous
+        and have gained a good reputation. They invested on a standing board with their business name
+        and phone number which they place on the footpath when they are washing the cars. This has
+        been a cheap and effective way of advertising their services and has led to new customers who
+        live in the street of existing customers or new customers who are driving past while they are
+        working and notice the sign. Their customers are generally in a 5km radius of their houses. This
+        is quite convenient as they do not want to travel far to work, they either bike or take public
+        transport to their customer’s homes. They would rather spend time earning money, then travelling
+        between customer’s houses so they are only looking to find clients close to their houses. They
+        have a vacuum cleaner pack that sits on their back like a backpack and another backpack with
+        cleaning supplies. They use electricity and water at their client’s homes and as such their business
+        running costs are low.
+    </div>
+    <a class="downArrow" href="#plans"></a>
+</div>
+
+<div id="plans">
+    <div id="plan_profile">
+        <h1>Choose the best plan for your car:</h1>
+        <h2><a href="Plans.html">View our plans in detail</a></h2>
+    </div>
+    <div id="plan_display">
+        <div id="silver">
+            <h1>Silver</h1>
+            <h1>$15</h1>
+            <div>
+                Wash outside only.
+            </div>
+        </div>
+        <div id="gold">
+            <h1>Gold</h1>
+            <h1>$25</h1>
+            <div>
+                Wash outside and inside.
+            </div>
+        </div>
+        <div id="diamond">
+            <h1>Diamond</h1>
+            <h1>$30</h1>
+            <div>
+                Wash outside and inside && <br> very dirty car.
+            </div>
+        </div>
+    </div>
+    <a class="upArrow" href="#introduction"></a>
+</div>
+
+<script>
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    if(getCookie("username")!==""){
+        document.querySelector("#login_register").innerHTML=`<a href="Personal.html">${getCookie("username")}</a>`;
+        document.querySelector("nav span").remove();
+    }
+</script>
+</body>
+</html>
