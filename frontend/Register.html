@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Register</title>
     <style>
-        #login{
+        #register{
             text-align: center;
         }
         input{
@@ -52,71 +52,78 @@
     </style>
 </head>
 <body>
-<div id="login">
-    <h1>Login</h1>
-    <input type="text" placeholder="username"/>
-    <p></p>
-    <input type="password" placeholder="password"/>
-    <p></p>
-    <button class="button">Submit</button>
-    <p>Do not have an account? <a href="Register.html">Sign up</a></p>
-</div>
-<script>
-    let go2 = false;
-    let go3 = false;
+<div id="register">
+    <h1>Be our client by signing up here.</h1>
 
-    document.querySelector('input[type="text"]').onblur = (event) => {
+        <input type="email" placeholder="email"/>
+        <p></p>
+        <input type="password" placeholder="password"/>
+        <p></p>
+    <button class="button">Submit</button>
+    <p>Already have an account? <a href="Login">Sign in</a></p>
+</div>
+
+<script>
+
+    let go1 = false;
+    let go2 = false;
+
+    document.querySelector('input[type="email"]').oninput = (event) => {
         let input = event.target;
-        let re = /\w{6,}/;
+        let re = /\S+@\S+\.\S+/;
         if(re.test(input.value)){
             input.nextElementSibling.innerHTML = "";
-            go2 = true;
+            go1 = true;
         }else{
-            input.nextElementSibling.innerHTML = "username is wrong format!";
+            input.nextElementSibling.innerHTML = "Email is wrong format!";
             input.nextElementSibling.style.color = "red";
-            go2 = false;
+            go1 = false;
         }
-    }
+    };
 
-    document.querySelector('input[type="password"]').onblur = (event) => {
+    document.querySelector('input[type="password"]').oninput = (event) => {
         let input = event.target;
         let re = /\S{6,}/;
         if(re.test(input.value)){
             input.nextElementSibling.innerHTML = "";
-            go3 = true;
+            go2 = true;
         }else{
             input.nextElementSibling.innerHTML = "password is wrong format!";
             input.nextElementSibling.style.color = "red";
-            go3 = false;
+            go2 = false;
         }
-    }
+    };
 
     document.querySelector('button').onclick = (event) => {
-        if(! (go2 && go3) ){
+        if(! (go1 && go2) ){
             alert("Please make sure you have all the input in the right format.");
             return;
         }
-        let username = document.querySelector('input[type="text"]').value;
+        let email = document.querySelector('input[type="email"]').value;
         let password = document.querySelector('input[type="password"]').value;
-        if(localStorage[username] === undefined){
-            alert("The username is wrong.");
+        /*if(localStorage[username] !== undefined){
+            alert("The username has been used.");
             return;
-        }else if(JSON.parse(localStorage[username]).password !== password){
-            alert("Wrong password.");
-            return;
-        }else{
-            alert(`Successfully login. Welcome, ${username}!`);
-
-            /*add cookie here*/
-            setCookie("username", username);
         }
-    }
-
-    function setCookie(cname, cvalue) {
-        let d = new Date();
-        d.setTime(d.getTime() + 60*60*1000);
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        localStorage[username] = JSON.stringify({"password":password, "email":email});*/
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let obj = JSON.parse(xhttp.responseText);
+                if(obj.success){
+                    alert("successful.");
+                    location.href = './Home';
+                }else if(obj.error){
+                    alert("fail because of error: " + obj.error);
+                }else{
+                    alert("Email has already been used.");
+                }
+            }
+        };
+        xhttp.open("POST", "registerHandler", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        let postdata = JSON.stringify({email:email,password:password});
+        xhttp.send(postdata);
     }
 </script>
 </body>

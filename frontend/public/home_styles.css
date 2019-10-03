@@ -176,3 +176,16 @@ h1{
 #diamond{
     background-color: floralwhite;
 }
+
+.logouticon{
+    cursor: pointer;
+}
+.logouticon span{
+    margin-left: 20px;
+    background: url('logout-16.ico');
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+
+    /* Other styles here */
+}

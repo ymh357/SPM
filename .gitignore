@@ -1,0 +1,5 @@
+.gitignore
+.idea
+backend/package-lock.json
+backend/node_modules
+frontend/.idea

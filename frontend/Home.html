@@ -12,12 +12,12 @@
 <nav>
     <ul>
         <li id="logo"></li>
-        <li><a href="Home.html">Home</a></li>
-        <li><a href="About.html">About us</a></li>
-        <li><a href="Plans.html">Plans</a></li>
-        <li id="login_register"><a href="Login.html">Login</a></li>
+        <li><a href="Home">Home</a></li>
+        <li><a href="About" target="_blank">About us</a></li>
+        <li><a href="Plans">Plans</a></li>
+        <li id="login_register"><a href="Login">Login</a></li>
     </ul>
-    <span>Not a user yet? Click <a href="Register.html">here</a> to register</span>
+    <span>Not a user yet? Click <a href="Register">here</a> to register</span>
 </nav>
 
 <div id="introduction">
@@ -52,7 +52,7 @@
 <div id="plans">
     <div id="plan_profile">
         <h1>Choose the best plan for your car:</h1>
-        <h2><a href="Plans.html">View our plans in detail</a></h2>
+        <h2><a href="Plans">View our plans in detail</a></h2>
     </div>
     <div id="plan_display">
         <div id="silver">
@@ -96,9 +96,13 @@
         }
         return "";
     }
-    if(getCookie("username")!==""){
-        document.querySelector("#login_register").innerHTML=`<a href="Personal.html">${getCookie("username")}</a>`;
+    if(getCookie("email")!==""){
         document.querySelector("nav span").remove();
+        document.querySelector("#login_register").innerHTML=`Welcome, <a href="./Personal">${getCookie("email")}</a><a class="logouticon"><span></span>logout</a>`;
+        document.querySelector('a.logouticon').onclick = (event) => {
+            document.cookie = 'email=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            location.reload();
+        };
     }
 </script>
 </body>

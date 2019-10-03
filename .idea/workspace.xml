@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07043648-efdf-4947-b4e6-27762013e0a0" name="Default Changelist" comment="" />
+    <list default="true" id="07043648-efdf-4947-b4e6-27762013e0a0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.idea/SPM.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/About.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/Book.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/Personal.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/Plans.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/aboutusbg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/goBooking.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/goBooking.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/logout-16.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/rebook.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/About.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Home.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Personal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plans.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Register.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audi.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/audi.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/bg.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/home_styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/logo.png" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +37,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -22,10 +48,20 @@
   <component name="ProjectId" id="1Rb0Ar2pwrOeQOmk76gZtA7jzSf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SPM\frontend\public" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -51,7 +87,11 @@
       <updated>1569920347029</updated>
       <workItem from="1569920348249" duration="19406000" />
       <workItem from="1569953708770" duration="9312000" />
-      <workItem from="1569989769501" duration="1280000" />
+      <workItem from="1569989769501" duration="15630000" />
+      <workItem from="1570035481537" duration="8296000" />
+      <workItem from="1570091304207" duration="19036000" />
+      <workItem from="1570116794850" duration="18944000" />
+      <workItem from="1570137044594" duration="257000" />
     </task>
     <servers />
   </component>
@@ -63,7 +103,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

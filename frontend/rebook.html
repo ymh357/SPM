@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reschedule the appointment</title>
+    <style>
+
+        h3{
+            display: inline-block;
+        }
+        .tip{
+            display: block;
+            color: red;
+        }
+        #rebook{
+            /*text-align: center;*/
+        }
+        input[type="email"], input[type="password"], input[type="text"], input[type="tel"]{
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom: 20px;
+            -webkit-appearance:none;
+            -moz-appearance: none;
+            outline:0;
+            padding-left: 10px;
+            width:30%;
+            font-size:1.4em;
+            height:2.7em;
+            border-radius:4px;
+            border:1px solid #c8cccf;
+        }
+        textarea{
+            display: block;
+            width: 30%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #cartype{
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+            *display: inline;
+            vertical-align: baseline;
+            margin: 0 2px;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font: 14px/100% Arial, Helvetica, sans-serif;
+            padding: .5em 2em .55em;
+            text-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -webkit-border-radius: .5em;
+            -moz-border-radius: .5em;
+            border-radius: .5em;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        }
+        .button:hover {
+            text-decoration: none;
+        }
+        .button:active {
+            position: relative;
+            top: 1px;
+        }
+
+        input[type="radio"] {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        label {
+            display: inline-block;
+            background-color: #ddd;
+            padding: 10px 20px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 2px solid #444;
+            border-radius: 4px;
+        }
+        input[type="radio"]:checked + label {
+            background-color:#bfb;
+            border-color: #4c4;
+        }
+        input[type="radio"]:focus + label {
+            border: 2px dashed #444;
+        }
+        label:hover {
+            background-color: #dfd;
+        }
+        #availabletime{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="rebook">
+    <h1>Reschedule an appointment for your carwash.</h1>
+    <div id="cartype">
+        <h3>Car Type*</h3>
+        <input id="Hatchback" type="radio" name="cartype" value="Hatchback"/> <label for="Hatchback">Hatchback</label>
+        <input id="Sedan" type="radio" name="cartype" value="Sedan"/> <label for="Sedan">Sedan</label>
+        <input id="SUV" type="radio" name="cartype" value="SUV"/> <label for="SUV">SUV</label>
+        <p class="tip"></p>
+    </div>
+    <div id="plantype">
+        <h3>Plan Type*</h3>
+        <input id="silver" type="radio" name="plantype" value="silver"/> <label for="silver">wash outside only $15</label>
+        <input id="gold" type="radio" name="plantype" value="gold"/> <label for="gold">wash inside and outside $25</label>
+        <input id="diamond" type="radio" name="plantype" value="diamond"/> <label for="diamond">deluxe wash $30 (which is inside and outside and the car is very dirty)</label>
+        <p class="tip"></p>
+    </div>
+    <div id="availabletime">
+        Available Time*
+        <select>
+            <option disabled selected value="-1">Choose your appointment time</option>
+            <option value="0900">09:00am - 09:40am</option>
+            <option value="0940">09:40am - 10:20am</option>
+            <option value="1020">10:20am - 11:00am</option>
+            <option disabled>-----------------</option>
+            <option value="0200">02:00pm - 02:40pm</option>
+            <option value="0240">02:40pm - 03:20pm</option>
+            <option value="0320">03:20pm - 04:00pm</option>
+            <option value="0400">04:00pm - 04:40pm</option>
+        </select>
+        <p class="tip"></p>
+        <!--<input type="date" name="aday">-->
+    </div>
+    <div id="description">
+        Extra description
+        <textarea placeholder="special instructions" rows="10" cols="50"></textarea>
+    </div>
+
+
+    <p></p>
+
+    <button class="button">Reschedule</button>
+</div>
+<script>
+    let id = getCookie("id");
+    document.cookie = 'id=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    let email;
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            let data = JSON.parse(xhttp.responseText);
+            if(data.error || data.nothing){
+                return;
+            }
+            email = data.email;
+            document.querySelector("textarea").value = data.description || "";
+            document.querySelector(`#${data.cartype}`).checked = true;
+            document.querySelector(`#${data.plantype}`).checked = true;
+            document.querySelector(`option[value="${data.time}"]`).selected = true;
+        }
+    };
+    xhttp.open("GET", "getAppointment?id=" + id, true);
+    xhttp.send();
+
+    document.querySelector('button').onclick = (event) => {
+        let [go1, go2, go3] = [false,false,false];
+        for(let radio of document.querySelectorAll('#cartype input[type="radio"]')){
+            radio.checked && (go1 = true);
+        }
+        for(let radio of document.querySelectorAll('#plantype input[type="radio"]')){
+            radio.checked && (go2 = true);
+        }
+        let select = document.querySelector("select");
+        (select.options[select.selectedIndex].value !== "-1") && (go3 = true);
+
+
+        if(! (go1 && go2 && go3) ){
+            go1 || (document.querySelector("#cartype .tip").innerHTML = "You have not chosen a car type.");
+            go1 && (document.querySelector("#cartype .tip").innerHTML = "");
+
+            go2 || (document.querySelector("#plantype .tip").innerHTML = "You have not chosen a plan.");
+            go2 && (document.querySelector("#plantype .tip").innerHTML = "");
+
+            go3 || (document.querySelector("#availabletime .tip").innerHTML = "You have not chosen an appointment time.");
+            go3 && (document.querySelector("#availabletime .tip").innerHTML = "");
+            alert("Please make sure you have all the necessary input in the right format.");
+            return;
+        }
+
+        for(let tip of document.querySelectorAll(".tip")){
+            tip.innerHTML = "";
+        }
+
+        let description = document.querySelector("textarea").value;
+        let cartype = document.querySelector("#cartype input[type='radio']:checked").value;
+        let plantype = document.querySelector("#plantype input[type='radio']:checked").value;
+        let time = select.options[select.selectedIndex].value;
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(xhttp.responseText);
+                if(data.error){
+                    console.dir(data.error);
+                    alert("Rebook failed because of the following error: " + data.error);
+                    return;
+                }
+                alert("Successfully rebooked an appointment! Please check your email");
+            }
+        };
+        xhttp.open("POST", "makeabook", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        let postdata = JSON.stringify({id:id, email: email, cartype:cartype, plantype: plantype, time: time, description: description});
+        console.dir(postdata);
+        xhttp.send(postdata);
+    };
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+</script>
+</body>
+</html>

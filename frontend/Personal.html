@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Information</title>
+    <style>
+        #cartypeTip{
+            display: block;
+            color: red;
+        }
+        #personal{
+            text-align: center;
+        }
+        input[type="email"], input[type="password"], input[type="text"], input[type="tel"]{
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom: 20px;
+            -webkit-appearance:none;
+            -moz-appearance: none;
+            outline:0;
+            padding-left: 10px;
+            width:30%;
+            font-size:1.4em;
+            height:2.7em;
+            border-radius:4px;
+            border:1px solid #c8cccf;
+        }
+        textarea{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
+            margin-bottom: 20px;
+        }
+        #cartype{
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+            *display: inline;
+            vertical-align: baseline;
+            margin: 0 2px;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font: 14px/100% Arial, Helvetica, sans-serif;
+            padding: .5em 2em .55em;
+            text-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -webkit-border-radius: .5em;
+            -moz-border-radius: .5em;
+            border-radius: .5em;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        }
+        .button:hover {
+            text-decoration: none;
+        }
+        .button:active {
+            position: relative;
+            top: 1px;
+        }
+
+        input[type="radio"] {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        label {
+            display: inline-block;
+            background-color: #ddd;
+            padding: 10px 20px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 2px solid #444;
+            border-radius: 4px;
+        }
+        input[type="radio"]:checked + label {
+            background-color:#bfb;
+            border-color: #4c4;
+        }
+        input[type="radio"]:focus + label {
+            border: 2px dashed #444;
+        }
+        label:hover {
+            background-color: #dfd;
+        }
+    </style>
+</head>
+<body>
+<div id="personal">
+    <h1>Personal Information</h1>
+    <input type="text" placeholder="name*"/>
+    <p></p>
+    <input type="tel" placeholder="mobile phone number"/>
+    <input type="tel" placeholder="home phone number"/>
+    <input type="tel" placeholder="work phone number"/>
+    <textarea placeholder="address" rows="10" cols="50"></textarea>
+    <div id="cartype">
+        <h3>Car Type*</h3>
+        <input id="Hatchback" type="radio" name="cartype" value="Hatchback"/> <label for="Hatchback">Hatchback</label>
+        <input id="Sedan" type="radio" name="cartype" value="Sedan"/> <label for="Sedan">Sedan</label>
+        <input id="SUV" type="radio" name="cartype" value="SUV"/> <label for="SUV">SUV</label>
+        <p id="cartypeTip"></p>
+    </div>
+    <p></p>
+
+    <button class="button">Update</button>
+</div>
+<script>
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            let data = JSON.parse(xhttp.responseText);
+            if(data.error || data.nothing){
+                return;
+            }
+            document.querySelector("input[placeholder='name*']").value = data.name;
+            document.querySelector("input[placeholder='mobile phone number']").value = data.mobilephone || "";
+            document.querySelector("input[placeholder='home phone number']").value = data.homephone || "";
+            document.querySelector("input[placeholder='work phone number']").value = data.workphone || "";
+            document.querySelector("textarea").value = data.address || "";
+            document.querySelector(`#${data.cartype}`).checked = true;
+        }
+    };
+    xhttp.open("GET", "getPersonal", true);
+    xhttp.send();
+
+    document.querySelector('input[placeholder="name*"]').oninput = (event) => {
+        let input = event.target;
+        let re = /^[a-zA-Z]+(\s*[a-zA-Z]+)*$/;
+        if(re.test(input.value)){
+            input.nextElementSibling.innerHTML = "";
+        }else{
+            input.nextElementSibling.innerHTML = "Name is wrong format!";
+            input.nextElementSibling.style.color = "red";
+        }
+    };
+
+    document.querySelector('button').onclick = (event) => {
+        let [go1,go2] = [false,false];
+        for(let radio of document.querySelectorAll('input[type="radio"]')){
+            radio.checked && (go1 = true);
+        }
+
+
+        let nameInput = document.querySelector('input[placeholder="name*"]').value;
+        let re = /^[a-zA-Z]+(\s*[a-zA-Z]+)*$/;
+        if(re.test(nameInput)) {
+            go2 = true;
+        }
+
+
+        if(! (go1 && go2) ){
+            go1 || (document.querySelector("#cartypeTip").innerHTML = "You have not chosen a car type.");
+            go1 && (document.querySelector("#cartypeTip").innerHTML = "");
+            alert("Please make sure you have all the necessary input in the right format.");
+            return;
+        }
+
+        let email = getCookie("email");
+        let name = document.querySelector("input[placeholder='name*']").value;
+        let mobilephone = document.querySelector("input[placeholder='mobile phone number']").value;
+        let homephone = document.querySelector("input[placeholder='home phone number']").value;
+        let workphone =  document.querySelector("input[placeholder='work phone number']").value;
+        let address = document.querySelector("textarea").value;
+        let cartype = document.querySelector("input[type='radio']:checked").value;
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(xhttp.responseText);
+                if(data.error){
+                    alert("Update failed because of the following error: " + data.error);
+                    return;
+                }
+                alert("Successfully updated personal information!");
+                location.reload();
+            }
+        };
+        xhttp.open("POST", "updatePersonal", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        let postdata = JSON.stringify({email:email, name:name, address: address, mobilephone: mobilephone, homephone: homephone, workphone: workphone, cartype: cartype});
+        console.dir(postdata);
+        xhttp.send(postdata);
+    }
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+</script>
+</body>
+</html>
