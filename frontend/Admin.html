@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <style>
+
+        h3{
+            display: inline-block;
+        }
+        input[type="email"], input[type="password"], input[type="text"], input[type="tel"]{
+            display:block;
+            margin-bottom: 20px;
+            -webkit-appearance:none;
+            -moz-appearance: none;
+            outline:0;
+            padding-left: 10px;
+            width:30%;
+            font-size:1.4em;
+            height:2.7em;
+            border-radius:4px;
+            border:1px solid #c8cccf;
+        }
+        textarea{
+            display: block;
+            width: 30%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+            *display: inline;
+            vertical-align: baseline;
+            margin: 0 2px;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font: 14px/100% Arial, Helvetica, sans-serif;
+            padding: .5em 2em .55em;
+            text-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -webkit-border-radius: .5em;
+            -moz-border-radius: .5em;
+            border-radius: .5em;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        }
+        .button:hover {
+            text-decoration: none;
+        }
+        .button:active {
+            position: relative;
+            top: 1px;
+        }
+        .hidden {
+            display: none;
+            width: 70%;
+            float: left;
+        }
+        #rightDiv{
+            width: 30%;
+            display: none;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<div id="admin">
+    <h1>View bookings list</h1>
+    <label>Please enter the admin password.</label>
+    <input type="password" placeholder="Enter password here">
+    <button class="button" id="signinBtn">Sign in</button>
+    <div>
+        <div class="hidden">
+            <ul>
+
+            </ul>
+        </div>
+        <div id="rightDiv">
+            <ul>
+                <li>Booking ID: #<label id="did"></label></li>
+                <li>Plan Type: <label id="dplan"></label></li>
+                <li>Car Type: <label id="dcar"></label></li>
+                <li>Time: <label id="dtime"></label></li>
+                <li>Email: <label id="demail"></label></li>
+                <li>Description: <label id="ddes"></label></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script>
+    let obj;
+    document.querySelector("#signinBtn").onclick = (event) => {
+        let password = document.querySelector('input[type="password"]').value;
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                obj = JSON.parse(xhttp.responseText);
+
+                document.querySelector(".hidden").style.display="block";
+                let ul =document.querySelector(".hidden ul");
+                ul.innerHTML='';
+                for(let appointment of obj){
+                    ul.insertAdjacentHTML("afterbegin", `<li>Booking ID: #${appointment.id}<button class="button det" onclick="showDetail(event)">See appointment detail</button><hr/></li>`)
+                }
+                document.querySelector("ul");
+                console.dir(obj);
+            }
+        };
+        xhttp.open("POST", "checkAdminPassword", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        let postdata = JSON.stringify({password:password});
+        xhttp.send(postdata);
+    }
+
+    function showDetail(event){
+        let index = event.target.parentElement.innerHTML.match(/#(.*)<b/)[1];
+        let i;
+        for(i = 0; i < obj.length; i++){
+            if(obj[i].id === parseInt(index)){
+                break;
+            }
+        }
+        document.querySelector("#rightDiv").style.display="block";
+        console.dir(obj);
+        console.dir(i);
+        console.dir(index);
+        document.querySelector("#did").innerHTML = obj[i].id;
+        document.querySelector("#dplan").innerHTML = obj[i].plantype;
+        document.querySelector("#dcar").innerHTML = obj[i].cartype;
+        document.querySelector("#demail").innerHTML = obj[i].email;
+        document.querySelector("#ddes").innerHTML = obj[i].description;
+        document.querySelector("#dtime").innerHTML = obj[i].time.toString().slice(0,2) + ":"  + obj[i].time.toString().slice(2);
+    }
+</script>
+
+</body>
+</html>

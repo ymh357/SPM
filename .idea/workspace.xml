@@ -2,30 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07043648-efdf-4947-b4e6-27762013e0a0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/.idea/SPM.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/About.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Book.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Personal.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Plans.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/aboutusbg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/goBooking.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/goBooking.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/logout-16.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/rebook.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/Admin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/About.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Home.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Personal.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plans.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Register.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audi.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/audi.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/bg.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/home_styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +70,12 @@
       <workItem from="1570035481537" duration="8296000" />
       <workItem from="1570091304207" duration="19036000" />
       <workItem from="1570116794850" duration="18944000" />
-      <workItem from="1570137044594" duration="257000" />
+      <workItem from="1570137044594" duration="948000" />
+      <workItem from="1570184301451" duration="1770000" />
+      <workItem from="1570835027152" duration="2025000" />
+      <workItem from="1571059127738" duration="49000" />
+      <workItem from="1571448018047" duration="751000" />
+      <workItem from="1571795987851" duration="6469000" />
     </task>
     <servers />
   </component>

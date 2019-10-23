@@ -57,6 +57,11 @@ app.get('/Register', function (req, res) {
     res.sendFile(path.join(__dirname, '../frontend', 'Register.html'));
 });
 
+app.get('/admin', function (req, res) {
+    res.sendFile(path.join(__dirname, '../frontend', 'Admin.html'));
+});
+
+
 app.post('/registerHandler', function (req, res) {
     let newUser = req.body;
     let responseJson;
@@ -112,6 +117,27 @@ app.post('/loginHandler', function (req, res) {
             });
         }
     });
+});
+
+app.post('/checkAdminPassword', function (req, res) {
+    let password = req.body.password;
+    let responseJson;
+
+    if(password === "+10086"){
+        connection.query(`select * from appointment`, function (err, results){
+            if(err){
+                responseJson = {error:err};
+                res.json(responseJson);
+            }else {
+                responseJson = results;
+                res.json(responseJson);
+            }
+        });
+
+    }else{
+        responseJson = {fail: "Wrong password."};
+        res.json(responseJson);
+    }
 });
 
 app.get('/getPersonal', function (req, res) {
