@@ -205,7 +205,7 @@ app.post('/makeabook', function (req, res) {
     let responseJson;
 
     if(appointment.id){
-        let sql = `UPDATE appointment SET email = '${appointment.email}', cartype = '${appointment.cartype}', plantype = '${appointment.plantype}', time = '${appointment.time}', description = '${appointment.description}' WHERE id = '${appointment.id}'`;
+        let sql = `UPDATE appointment SET email = '${appointment.email}', cartype = '${appointment.cartype}', plantype = '${appointment.plantype}', time = '${appointment.time}', date = '${appointment.date}', description = '${appointment.description}' WHERE id = '${appointment.id}'`;
         connection.query(sql, function (err, results) {
            if(err){
                responseJson = {error: err};
@@ -245,6 +245,7 @@ app.post('/makeabook', function (req, res) {
                 <ul>
                     <li>Car Type: ${appointment.cartype}</li>
                     <li>Plan: ${plan}</li>
+                    <li>Appointment Date: ${appointment.date}</li>
                     <li>Appointment Time: ${time}</li>
                     <li>Description: ${appointment.description}</li>
                 </ul>
@@ -270,7 +271,7 @@ app.post('/makeabook', function (req, res) {
         return;
     }
 
-    let sql = `INSERT INTO appointment (email, cartype, plantype, time, description) VALUES ("${email}", "${appointment.cartype}", "${appointment.plantype}", "${appointment.time}", "${appointment.description}")`;
+    let sql = `INSERT INTO appointment (email, cartype, plantype, time, date, description) VALUES ("${email}", "${appointment.cartype}", "${appointment.plantype}", "${appointment.time}", "${appointment.date}", "${appointment.description}")`;
     connection.query(sql, function (err, results){
         if(err){
             console.dir(err);
@@ -312,6 +313,7 @@ app.post('/makeabook', function (req, res) {
                 <ul>
                     <li>Car Type: ${appointment.cartype}</li>
                     <li>Plan: ${plan}</li>
+                    <li>Appointment Date: ${appointment.date}</li>
                     <li>Appointment Time: ${time}</li>
                     <li>Description: ${appointment.description}</li>
                 </ul>
@@ -397,7 +399,7 @@ app.get('/getAppointment', function (req, res) {
             res.json(responseJson);
         }else if(results.length===1){
             let result = results[0];
-            responseJson = {email:result.email, cartype:result.cartype, plantype: result.plantype, time: result.time, description: result.description};
+            responseJson = {email:result.email, cartype:result.cartype, plantype: result.plantype, time: result.time, date: result.date,description: result.description};
             res.json(responseJson);
         }
     });

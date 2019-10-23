@@ -83,6 +83,7 @@
                 <li>Booking ID: #<label id="did"></label></li>
                 <li>Plan Type: <label id="dplan"></label></li>
                 <li>Car Type: <label id="dcar"></label></li>
+                <li>Date: <label id="ddate"></label></li>
                 <li>Time: <label id="dtime"></label></li>
                 <li>Email: <label id="demail"></label></li>
                 <li>Description: <label id="ddes"></label></li>
@@ -133,6 +134,7 @@
         document.querySelector("#dcar").innerHTML = obj[i].cartype;
         document.querySelector("#demail").innerHTML = obj[i].email;
         document.querySelector("#ddes").innerHTML = obj[i].description;
+        document.querySelector("#ddate").innerHTML = obj[i].date;
         document.querySelector("#dtime").innerHTML = obj[i].time.toString().slice(0,2) + ":"  + obj[i].time.toString().slice(2);
     }
 </script>

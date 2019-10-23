@@ -113,6 +113,11 @@
         <input id="diamond" type="radio" name="plantype" value="diamond"/> <label for="diamond">deluxe wash $30 (which is inside and outside and the car is very dirty)</label>
         <p class="tip"></p>
     </div>
+    <div id="appointmentDate">
+        Appointment date*
+        <input type="date">
+        <p class="tip"></p>
+    </div>
     <div id="availabletime">
         Available Time*
         <select>
@@ -145,7 +150,7 @@
     document.querySelector(`#plantype input[value="${plan}"]`).checked = true;
 
     document.querySelector('button').onclick = (event) => {
-        let [go1, go2, go3] = [false,false,false];
+        let [go1, go2, go3, go4] = [false,false,false,false];
         for(let radio of document.querySelectorAll('#cartype input[type="radio"]')){
             radio.checked && (go1 = true);
         }
@@ -155,9 +160,11 @@
         let select = document.querySelector("select");
         (select.options[select.selectedIndex].value !== "-1") && (go3 = true);
 
+        let dateNode = document.querySelector("input[type='date']");
+        console.dir(dateNode.value);
+        (dateNode.value) && (go4 = true);
 
-
-        if(! (go1 && go2 && go3) ){
+        if(! (go1 && go2 && go3 && go4) ){
             console.dir(go1);
             console.dir(go2);
             console.dir(go3);
@@ -169,6 +176,9 @@
 
             go3 || (document.querySelector("#availabletime .tip").innerHTML = "You have not chosen an appointment time.");
             go3 && (document.querySelector("#availabletime .tip").innerHTML = "");
+
+            go4 || (document.querySelector("#appointmentDate .tip").innerHTML = "You have not chosen an appointment date.");
+            go4 && (document.querySelector("#appointmentDate .tip").innerHTML = "");
             alert("Please make sure you have all the necessary input in the right format.");
             return;
         }
@@ -180,6 +190,7 @@
         let cartype = document.querySelector("#cartype input[type='radio']:checked").value;
         let plantype = document.querySelector("#plantype input[type='radio']:checked").value;
         let time = select.options[select.selectedIndex].value;
+        let date = dateNode.value;
 
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -194,7 +205,7 @@
         };
         xhttp.open("POST", "makeabook", true);
         xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        let postdata = JSON.stringify({cartype:cartype, plantype: plantype, time: time, description: description});
+        let postdata = JSON.stringify({cartype:cartype, plantype: plantype, time: time, description: description, date: date});
         console.dir(postdata);
         xhttp.send(postdata);
     };
